@@ -44,6 +44,7 @@ route::get('/inertia/index',[InertiaTestController::class, 'index'])->name('iner
 route::get('/inertia/create',[InertiaTestController::class, 'create'])->name('inertia.create');
 route::post('/inertia',[InertiaTestController::class, 'store'])->name('inertia.store');
 route::get('/inertia/show/{id}',[InertiaTestController::class, 'show'])->name('inertia.show');
+route::delete('/inertia/{id}',[InertiaTestController::class, 'delete'])->name('inertia.delete');
 
 
 require __DIR__.'/auth.php';
