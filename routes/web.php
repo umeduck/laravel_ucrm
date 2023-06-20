@@ -40,6 +40,10 @@ route::get('/inertia-test',function(){
     return Inertia::render('InertiaTest');
 });
 
+route::get('/component-test',function(){
+    return Inertia::render('ComponentTest');
+});
+
 route::get('/inertia/index',[InertiaTestController::class, 'index'])->name('inertia.index');
 route::get('/inertia/create',[InertiaTestController::class, 'create'])->name('inertia.create');
 route::post('/inertia',[InertiaTestController::class, 'store'])->name('inertia.store');
