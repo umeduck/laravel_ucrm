@@ -15,7 +15,7 @@ class ItemSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('items')->inset([
+        DB::table('items')->insert([
             [
                 'name' => 'コーヒー',
                 'memo' => 'ツッカーノブルボン',

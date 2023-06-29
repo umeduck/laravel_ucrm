@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
-use App\Models\Item;
 use Inertia\Inertia;
 
 class ItemController extends Controller
@@ -16,7 +15,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Items/Index');
+        $items = Item::select('id','name','price','is_selling')->get();
+        
+        return Inertia::render('Items/Index',[
+            'items' => $items
+        ]);
     }
 
     /**
