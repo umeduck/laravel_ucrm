@@ -4,6 +4,7 @@ import { Head,Link } from '@inertiajs/inertia-vue3';
 import { nl2br } from '@/common';
 import { Inertia } from '@inertiajs/inertia';
 
+
 defineProps({
   item : Object
 })
