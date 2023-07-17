@@ -20,19 +20,19 @@ class ItemSeeder extends Seeder
                 'name' => 'コーヒー',
                 'memo' => 'ツッカーノブルボン',
                 'price' => 300,
-                'is_selling' => 0
+                'is_selling' => 1
             ],
             [
                 'name' => '紅茶',
                 'memo' => 'イタライ産',
                 'price' => 300,
-                'is_selling' => 0
+                'is_selling' => 1
             ],
             [
                 'name' => 'オレンジジュース',
                 'memo' => 'オレンジ100%',
                 'price' => 200,
-                'is_selling' => 0
+                'is_selling' => 1
             ],
         ]);
     }
