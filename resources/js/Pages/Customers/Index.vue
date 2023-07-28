@@ -36,9 +36,9 @@ defineProps({
                                     <button class="bg-blue-300 text-white py-2 px-2" @click="searchCustomers">検索</button>
                                 </div>
                                 <Link as="button" :href="route('customers.create')" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">顧客登録</Link>
-                                </div>
-                                <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-                                <table class="table-auto w-full text-left whitespace-no-wrap">
+                            </div>
+                            <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+                              <table class="table-auto w-full text-left whitespace-no-wrap">
                                 <thead>
                                 <tr>
                                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">id</th>
@@ -57,7 +57,7 @@ defineProps({
                                     <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ customer.tel }}</td>
                                 </tr>
                                 </tbody>
-                            </table>
+                              </table>
                             </div>
                         </div>
                         <Pagination class="mt-6" :links="customers.links"></Pagination>
