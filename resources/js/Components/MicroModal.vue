@@ -1,5 +1,6 @@
 <script setup>
 import axios from 'axios';
+import { formToJSON } from 'axios';
 import { ref, reactive, onMounted } from 'vue';
 
 const search = ref('')
@@ -19,15 +20,25 @@ const searchCustomers = async () => {
   try{ 
     await axios.get(`/api/searchCustomers/?search=${search.value}`)
     .then( res => {
-      console.log(res.data)
+      console.log(1);
       customers.value = res.data
     })
     isShow.value = !isShow.value
   } catch (e) {
     console.log(e)
   }
-  console.log(customers.value);
 }
+
+const emit = defineEmits(['update:customerId'])
+
+const setCustomer = e => {
+  search.value = e.kana
+  emit('update:customerId', e.id)
+  toggleStatus()
+}
+
+
+
 </script>
 <template>
     <div v-if="isShow" class="modal" id="modal-1" aria-hidden="true">
@@ -52,7 +63,11 @@ const searchCustomers = async () => {
               </thead>
               <tbody>
                 <tr v-for="customer in customers.value.data">
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ customer.id }}</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">
+                    <button @click="setCustomer( { id: customer.id, kana: customer.kana } )" type="button" class="text-blue-400">
+                      {{ customer.id }}
+                    </button>
+                  </td>
                   <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ customer.name }}</td>
                   <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ customer.kana }}</td>
                   <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ customer.tel }}</td>
