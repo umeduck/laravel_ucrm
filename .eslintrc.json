@@ -1,0 +1,15 @@
+{
+  "plugins": ["vue"],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "globals": {},
+  "rules": {
+    "vue/html-indent": "error"
+  }
+}
