@@ -3,38 +3,38 @@ import axios from 'axios';
 import { formToJSON } from 'axios';
 import { ref, reactive, onMounted } from 'vue';
 
-const search = ref('')
-const customers = reactive({})
+const search = ref('');
+const customers = reactive({});
 
 onMounted( () => {
   axios.get('/api/user')
   .then( res => {
-    console.log(res.data) 
-  })
-})
+    console.log(res.data); 
+  });
+});
 const isShow = ref(false);
 
-const toggleStatus = () => {isShow.value = !isShow.value}
+const toggleStatus = () => {isShow.value = !isShow.value;};
 
 const searchCustomers = async () => {
   try{ 
     await axios.get(`/api/searchCustomers/?search=${search.value}`)
     .then( res => {
-      customers.value = res.data
-    })
-    isShow.value = !isShow.value
+      customers.value = res.data;
+    });
+    isShow.value = !isShow.value;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
-const emit = defineEmits(['update:customerId'])
+const emit = defineEmits(['update:customerId']);
 
 const setCustomer = e => {
-  search.value = e.kana
-  emit('update:customerId', e.id)
-  toggleStatus()
-}
+  search.value = e.kana;
+  emit('update:customerId', e.id);
+  toggleStatus();
+};
 
 
 

@@ -11,20 +11,20 @@ const props = defineProps({
   'customers' : Array,
   'items' : Array,
   errors: Object
-})
+});
 
 const form = reactive({ 
   date: null,
   customer_id: null,
   status: true,
   items: []
-})
+});
 
-const itemList =ref([])
+const itemList =ref([]);
 
 const quantity = [];
 for(let i=0; i<10; i++){
-  quantity.push(i)
+  quantity.push(i);
 }
 
 onMounted(() => {
@@ -35,30 +35,30 @@ onMounted(() => {
       name: item.name,
       price: item.price,
       quantity: 0
-    })
-  })
-})
+    });
+  });
+});
 
 const totalPrice = computed(() => {
-  let total = 0
+  let total = 0;
   itemList.value.forEach( item => {
-    total += item.price * item.quantity
-  })
-  return total
-})
+    total += item.price * item.quantity;
+  });
+  return total;
+});
 
 const storePurchase = () => {
   itemList.value.forEach( item => {
     if (item.quantity > 0) {
-      form.items.push({ id: item.id, quantity: item.quantity})
+      form.items.push({ id: item.id, quantity: item.quantity});
     }
-  })
-  Inertia.post('/purchases', form)
-}
+  });
+  Inertia.post('/purchases', form);
+};
 
 const setCustomerId = id => {
-  form.customer_id = id
-}
+  form.customer_id = id;
+};
 
 </script>
 
@@ -171,5 +171,9 @@ th, td{
 .submit-button:hover {
 	color: #fff;
 	background: #27acd9;
+}
+.submit-button button {
+  width: 100%;
+  height: 3rem;
 }
 </style>

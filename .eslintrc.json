@@ -6,10 +6,11 @@
   },
   "env": {
     "browser": true,
-    "es2021": true
+    "es2022": true
   },
   "globals": {},
   "rules": {
+    "semi": "error",
     "vue/html-indent": "error"
   }
 }

@@ -10,9 +10,9 @@ const props = defineProps({
   'items' : Array,
   'order' : Array,
   errors: Object
-})
+});
 
-const itemList =ref([])
+const itemList =ref([]);
 
 const form = reactive({ 
   id: props.order[0].id,
@@ -20,11 +20,11 @@ const form = reactive({
   customer_id: props.order[0].customer_id,
   status: props.order[0].status,
   items: itemList.value
-})
+});
 
 const quantity = [];
 for(let i=0; i<10; i++){
-  quantity.push(i)
+  quantity.push(i);
 }
 
 onMounted(() => {
@@ -37,19 +37,19 @@ onMounted(() => {
         name: item.name,
         price: item.price,
         quantity: item.quantity
-      })
+      });
     }
     
-  })
-})
+  });
+});
 
 const totalPrice = computed(() => {
-  let total = 0
+  let total = 0;
   itemList.value.forEach( item => {
-    total += item.price * item.quantity
-  })
-  return total
-})
+    total += item.price * item.quantity;
+  });
+  return total;
+});
 
 const updatePurchase = id => {
   // itemList.value.forEach( item => {
@@ -57,8 +57,8 @@ const updatePurchase = id => {
   //     form.items.push({ id: item.id, quantity: item.quantity})
   //   }
   // })
-  Inertia.put(route('purchases.update', {purchase: id}), form)
-}
+  Inertia.put(route('purchases.update', {purchase: id}), form);
+};
 </script>
 
 <template>
