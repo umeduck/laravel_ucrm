@@ -5,7 +5,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
     items: Array
-})
+});
 </script>
 
 <template>
