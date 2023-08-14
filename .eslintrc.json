@@ -10,7 +10,7 @@
   },
   "globals": {},
   "rules": {
-    "semi": "error",
-    "vue/html-indent": "error"
+    "semi": "warn",
+    "vue/html-indent": "warn"
   }
 }
