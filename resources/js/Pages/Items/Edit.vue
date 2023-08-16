@@ -8,7 +8,7 @@ import InputError from '@/Components/InputError.vue';
 const props = defineProps({
   item: Object,
   errors: Object,
-})
+});
 
 const form = reactive({
   id : props.item.id,
@@ -16,11 +16,11 @@ const form = reactive({
   memo: props.item.memo,
   price: props.item.price,
   is_selling: props.item.is_selling
-})
+});
 
 const updateItem = id => {
-  Inertia.put(route('items.update', { item: id}), form)
-}
+  Inertia.put(route('items.update', { item: id}), form);
+};
 </script>
 
 <template>

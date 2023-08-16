@@ -28,7 +28,7 @@ const getData = async () => {
       }
     })
     .then(res => {
-      data.data = res.data.data; 
+      data.data = res.data.data;
     });
   }catch(e){
     console.log(e.message);
