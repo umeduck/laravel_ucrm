@@ -11,6 +11,9 @@
   "globals": {},
   "rules": {
     "semi": "warn",
+    "no-irregular-whitespace": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-trailing-spaces": "warn",
     "vue/html-indent": "warn"
   }
 }
