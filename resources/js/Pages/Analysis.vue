@@ -4,6 +4,7 @@ import { Head } from '@inertiajs/vue3';
 import { reactive, onMounted } from 'vue';
 import { getToday } from '@/common';
 import axios from 'axios';
+import Chart from '@/Components/Chart.vue';
 
 onMounted(() => {
   form.startDate = getToday();
@@ -28,7 +29,9 @@ const getData = async () => {
       }
     })
     .then(res => {
-      data.data = res.data.data; 
+      data.data = res.data.data;
+      data.labels = res.data.labels;
+      data.totals = res.data.totals;
     });
   }catch(e){
     console.log(e.message);
@@ -54,6 +57,12 @@ const getData = async () => {
               <button>分析する</button>
             </div>
           </form>
+
+          <div v-show="data.data" class="w-full mx-auto overflow-auto ">
+            <Chart :data="data" />
+          </div>
+          
+
           <div v-show="data.data" class="lg:w-2/3 w-full mx-auto overflow-auto">
             <table class="table-auto w-full text-left whitespace-no-wrap">
               <thead>
@@ -83,7 +92,6 @@ const getData = async () => {
     text-decoration: none;
     width: 220px;
     margin: 10px auto 0;
-    padding: 1rem 4rem;
     font-weight: bold;
     border: 2px solid #27acd9;
     color: #27acd9;
@@ -95,6 +103,6 @@ const getData = async () => {
 }
 .submit-button button {
   width: 100%;
-  height: 2.2rem;
+  height: 4.2rem;
 }
 </style>
