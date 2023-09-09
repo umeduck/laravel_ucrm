@@ -30,7 +30,8 @@ class Subtotal implements Scope
                 , purchases.created_at
                 , purchases.updated_at
                 from purchases
-                left join item_purchase on purchases.id = item_purchase.purchase_id left join items on item_purchase.item_id = items.id
+                left join item_purchase on purchases.id = item_purchase.purchase_id
+                left join items on item_purchase.item_id = items.id
                 left join customers on purchases.customer_id = customers.id
                 ';
         

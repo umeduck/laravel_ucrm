@@ -9,6 +9,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use App\Services\AnalysisService;
 use App\Services\DecileService;
+use Illuminate\Support\Facades\Log;
 
 class AnalysisController extends Controller
 {
