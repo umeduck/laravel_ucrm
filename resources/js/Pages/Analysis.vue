@@ -5,6 +5,7 @@ import { reactive, onMounted } from 'vue';
 import { getToday } from '@/common';
 import axios from 'axios';
 import Chart from '@/Components/Chart.vue';
+import ResultTable from '@/Components/ResultTable.vue';
 
 onMounted(() => {
   form.startDate = getToday();
@@ -14,7 +15,8 @@ onMounted(() => {
 const form = reactive({
   startDate: null,
   endDate: null,
-  type: 'perDay'
+  type: 'perDay',
+  rfmPrms: [ 15, 30, 60, 120, 7, 5, 3, 2, 10000, 8000, 5000, 3000 ]
 });
 
 const data = reactive({});
@@ -32,6 +34,7 @@ const getData = async () => {
       data.data = res.data.data;
       data.labels = res.data.labels;
       data.totals = res.data.totals;
+      data.type = res.data.type;
     });
   }catch(e){
     console.log(e.message);
@@ -51,8 +54,53 @@ const getData = async () => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-10 px-10">
           <form @submit.prevent="getData">
+            分析方法<br>
+            <input type="radio" v-model="form.type" value="perDay" checked><span class="mr-4">日別</span>
+            <input type="radio" v-model="form.type" value="perMonth"><span class="mr-4">月別</span>
+            <input type="radio" v-model="form.type" value="perYear"><span class="mr-4">年別</span>
+            <input type="radio" v-model="form.type" value="decile"><span class="mr-4">デシル分析</span>
+            <input type="radio" v-model="form.type" value="rfm"><span class="mr-4">RFM分析</span><br>
             From: <input type="date" name="startDate" v-model="form.startDate">
             To: <input type="date" name="endDate" v-model="form.endDate"><br>
+
+            <div v-if="form.type === 'rfm'">
+              <table class="mx-auto">
+                <thead>
+                  <tr>
+                    <th>ランク</th>
+                    <th>R (⚪︎日以内)</th>
+                    <th>F (⚪︎回以上)</th>
+                    <th>M (⚪︎円以上)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>5</td>
+                    <td><input type="number" v-model="form.rfmPrms[0]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[4]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[8]"></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td><input type="number" v-model="form.rfmPrms[1]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[5]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[9]"></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td><input type="number" v-model="form.rfmPrms[2]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[6]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[10]"></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><input type="number" v-model="form.rfmPrms[3]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[7]"></td>
+                    <td><input type="number" v-model="form.rfmPrms[11]"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="submit-button">
               <button>分析する</button>
             </div>
@@ -60,24 +108,7 @@ const getData = async () => {
 
           <div v-show="data.data" class="w-full mx-auto overflow-auto ">
             <Chart :data="data" />
-          </div>
-          
-
-          <div v-show="data.data" class="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table class="table-auto w-full text-left whitespace-no-wrap">
-              <thead>
-                <tr>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">年月日</th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">金額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="data in data.data" :key="data.date">
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ data.date  }}</td>
-                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{ data.total }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <ResultTable :data="data" />
           </div>
         </div>
       </div>
