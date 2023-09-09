@@ -27,14 +27,17 @@ const getData = async () => {
       params:{
         startDate:form.startDate,
         endDate:form.endDate,
-        type: form.type
+        type: form.type,
+        rfmPrms: form.rfmPrms
       }
     })
     .then(res => {
       data.data = res.data.data;
-      data.labels = res.data.labels;
       data.totals = res.data.totals;
       data.type = res.data.type;
+      console.log(res.data);
+      if(res.data.labels){data.labels = res.data.labels;}
+      if(res.data.eachCount){data.eachCount = res.data.eachCount;}
     });
   }catch(e){
     console.log(e.message);
@@ -107,7 +110,9 @@ const getData = async () => {
           </form>
 
           <div v-show="data.data" class="w-full mx-auto overflow-auto ">
-            <Chart :data="data" />
+            <div v-if="data.type != 'rfm' ">
+              <Chart :data="data" />
+            </div>
             <ResultTable :data="data" />
           </div>
         </div>
